@@ -34,7 +34,11 @@
 -- die ervoor zorgt dat alleen 'M' of 'V' als geldige waarde wordt
 -- geaccepteerd. Test deze regel en neem de gegooide foutmelding op als
 -- commentaar in de uitwerking.
-
+ALTER TABLE medewerkers ADD COLUMN geslacht CHAR(1) CONSTRAINT m_geslacht_chk CHECK (geslacht IN ('M', 'V'));
+INSERT INTO medewerkers(naam,voorl,gbdatum,maandsal,geslacht,mnr) VALUES('test','test2','2020-01-02',100,'M',7050);
+DELETE FROM medewerkers where mnr=7050;
+-- De error die wordt gegeven bij ongeldig:
+-- ERROR: new row for relation "medewerkers" violates check constraint "m_geslacht_chk"
 
 -- S1.2. Nieuwe afdeling
 --
